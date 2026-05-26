@@ -1,19 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
-import { 
-  Waves, 
-  Leaf, 
-  Bird, 
-  ArrowRight, 
-  Calendar, 
-  Users, 
-  Instagram, 
-  PhoneCall, 
-  Compass, 
-  Check, 
-  MapPin, 
-  Anchor, 
-  Clock, 
-  Eye, 
+import {
+  Waves,
+  Leaf,
+  Bird,
+  ArrowRight,
+  Calendar,
+  Users,
+  Instagram,
+  PhoneCall,
+  Compass,
+  Check,
+  MapPin,
+  Anchor,
+  Clock,
+  Eye,
   Heart,
   HelpCircle,
   Volume2,
@@ -24,14 +24,14 @@ import Header from './components/Header';
 import MapIllustration from './components/MapIllustration';
 import BookingWidget from './components/BookingWidget';
 import RoomModal from './components/RoomModal';
-import { 
-  ROOMS_AND_SPACES, 
-  AMENITIES, 
-  EXPERIENCES, 
-  ACTIVITIES, 
-  GALLERY_ITEMS, 
-  TESTIMONIALS, 
-  MILESTONES 
+import {
+  ROOMS_AND_SPACES,
+  AMENITIES,
+  EXPERIENCES,
+  ACTIVITIES,
+  GALLERY_ITEMS,
+  TESTIMONIALS,
+  MILESTONES
 } from './data';
 import { RoomSpace } from './types';
 import { collection, onSnapshot, doc, query, orderBy } from 'firebase/firestore';
@@ -58,7 +58,7 @@ export default function App() {
   const [bookingRoomId, setBookingRoomId] = useState<string>('colonial-room');
   const [galleryFilter, setGalleryFilter] = useState<string>('All');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-  
+
   // Custom video playback controller fallback
   const [videoPlaybackSupported, setVideoPlaybackSupported] = useState<boolean>(true);
 
@@ -210,8 +210,8 @@ export default function App() {
   };
 
   const categories = ['All', 'The Spaces', 'Surf', 'Nature', 'Sanctuary'];
-  const filteredGallery = galleryFilter === 'All' 
-    ? gallery 
+  const filteredGallery = galleryFilter === 'All'
+    ? gallery
     : gallery.filter(item => item.category === galleryFilter || (galleryFilter === 'The Spaces' && item.category === 'The Spaces'));
 
   if (loading) {
@@ -228,27 +228,27 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg-dark text-text-light selection:bg-terracotta selection:text-text-light relative font-sans">
-      
+
       {/* Sticky Modular Header */}
       <Header />
 
       {/* SECTION 1 — HERO & PHILOSOPHY DUAL-PANEL (EDITORIAL AESTHETIC) */}
-      <section 
-        id="hero" 
+      <section
+        id="hero"
         className="relative min-h-[calc(100vh-80px)] xl:min-h-screen bg-[#140f08] text-[#f2e8d8] flex flex-col justify-center px-6 md:px-12 lg:px-12 xl:px-16 pt-24 pb-12 overflow-hidden"
       >
         <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-[radial-gradient(circle_at_bottom_left,rgba(196,122,82,0.18),transparent_50%)]"></div>
 
         <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col lg:flex-row gap-8 xl:gap-14 items-stretch relative z-10">
-          
+
           {/* LEFT HALF — HERO PRESENTATION CARD (3/5 width on desktop) */}
           <div className="w-full lg:w-3/5 flex flex-col justify-between">
             {/* The main picture frame with asymmetric curves */}
             <div className="flex-1 bg-[#1e1509] relative rounded-tl-[120px] rounded-br-[60px] overflow-hidden border border-terracotta/20 flex flex-col justify-end p-8 md:p-12 min-h-[460px] lg:min-h-[500px] group shadow-xl">
               {/* Backing image with elegant parallax scale zoom */}
               <div className="absolute inset-0 z-0">
-                <img 
-                  src={siteImages?.heroImage || DEFAULT_SITE_IMAGES.heroImage} 
+                <img
+                  src={siteImages?.heroImage || DEFAULT_SITE_IMAGES.heroImage}
                   alt="Aethera Colonial Facade"
                   className="w-full h-full object-cover scale-102 transition-transform duration-[12000s] animate-pulse opacity-60"
                   referrerPolicy="no-referrer"
@@ -270,13 +270,13 @@ export default function App() {
 
                 {/* Left card Actions */}
                 <div className="flex flex-wrap items-center gap-4">
-                  <a 
+                  <a
                     href="#booking"
                     className="bg-terracotta hover:bg-[#b06740] text-text-light font-sans text-[11px] font-semibold uppercase tracking-widest px-6 py-3.5 rounded-full transition-all duration-300"
                   >
                     Book Your Stay
                   </a>
-                  <a 
+                  <a
                     href="#spaces"
                     className="bg-transparent border border-white/20 hover:border-white/50 text-white font-sans text-[11px] font-semibold uppercase tracking-widest px-6 py-3.5 rounded-full transition-all duration-300"
                   >
@@ -289,7 +289,7 @@ export default function App() {
             {/* Core aesthetic info row under the main picture frame */}
             <div className="flex mt-6 gap-6 md:gap-12 items-center pb-2 md:pb-0">
               <div className="flex gap-3">
-                <div 
+                <div
                   onClick={() => {
                     const colonialSpace = ROOMS_AND_SPACES.find(s => s.id === 'colonial-room');
                     if (colonialSpace) setSelectedRoom(colonialSpace);
@@ -299,7 +299,7 @@ export default function App() {
                 >
                   🌊
                 </div>
-                <div 
+                <div
                   onClick={() => {
                     const gardenSpace = ROOMS_AND_SPACES.find(s => s.id === 'garden-courtyard');
                     if (gardenSpace) setSelectedRoom(gardenSpace);
@@ -309,7 +309,7 @@ export default function App() {
                 >
                   🌿
                 </div>
-                <div 
+                <div
                   onClick={() => {
                     const tubSpace = ROOMS_AND_SPACES.find(s => s.id === 'tub-terrace');
                     if (tubSpace) setSelectedRoom(tubSpace);
@@ -329,7 +329,7 @@ export default function App() {
 
           {/* RIGHT HALF — PHILOSOPHY & FAST DIRECT PASS (2/5 width on desktop) */}
           <div className="w-full lg:w-2/5 flex flex-col relative" id="philosophy">
-            
+
             {/* The parchment narrative block */}
             <div className="bg-bg-parchment p-8 md:p-10 flex-1 rounded-tr-[80px] rounded-bl-[30px] lg:rounded-bl-none text-text-dark flex flex-col justify-between relative shadow-2xl border border-terracotta/10">
               <div>
@@ -344,7 +344,7 @@ export default function App() {
 
               {/* Fast links matching the template's specs */}
               <div className="space-y-3 pt-4 border-t border-text-dark/10 font-sans">
-                <div 
+                <div
                   onClick={() => {
                     const space = ROOMS_AND_SPACES.find(s => s.id === 'terrace-suite');
                     if (space) setSelectedRoom(space);
@@ -357,7 +357,7 @@ export default function App() {
                   </span>
                   <span className="ml-auto text-[11px] opacity-45 italic group-hover:translate-x-1 transition-transform">View Details →</span>
                 </div>
-                <div 
+                <div
                   onClick={() => {
                     const space = ROOMS_AND_SPACES.find(s => s.id === 'tub-terrace');
                     if (space) setSelectedRoom(space);
@@ -370,7 +370,7 @@ export default function App() {
                   </span>
                   <span className="ml-auto text-[11px] opacity-45 italic group-hover:translate-x-1 transition-transform">View Details →</span>
                 </div>
-                <div 
+                <div
                   onClick={() => {
                     const space = ROOMS_AND_SPACES.find(s => s.id === 'garden-courtyard');
                     if (space) setSelectedRoom(space);
@@ -386,7 +386,7 @@ export default function App() {
               </div>
 
               {/* Book Direct badge sticking in the dynamic position */}
-              <a 
+              <a
                 href="#booking"
                 className="absolute xl:-bottom-6 xl:-right-6 -bottom-4 right-4 w-28 h-28 md:w-32 md:h-32 bg-[#c47a52] hover:bg-[#b06740] rounded-full flex flex-col items-center justify-center text-text-light text-[10px] tracking-[0.2em] uppercase text-center font-semibold leading-tight shadow-xl border border-gold-light/10 hover:scale-105 active:scale-95 transition-all duration-300 select-none z-20 cursor-pointer text-white"
               >
@@ -400,12 +400,12 @@ export default function App() {
       </section>
 
       {/* SECTION 3 — THE PROPERTY (Rooms & Spaces) */}
-      <section 
-        id="spaces" 
+      <section
+        id="spaces"
         className="py-18 md:py-28 bg-bg-parchment text-text-dark px-6 md:px-12 relative"
       >
         <div className="max-w-7xl mx-auto">
-          
+
           <div className="mb-10 text-center md:text-left">
             <span className="font-sans text-xs uppercase tracking-widest text-terracotta font-semibold block mb-2">
               THE SPACES
@@ -420,14 +420,14 @@ export default function App() {
             {ROOMS_AND_SPACES.map((space) => {
               const isSocial = space.ratePerNight === 0;
               return (
-                <div 
-                  key={space.id} 
+                <div
+                  key={space.id}
                   className={`bg-white border border-terracotta/20 rounded-tl-[48px] rounded-br-[24px] overflow-hidden hover:shadow-xl hover:border-terracotta/40 transition-all duration-500 flex flex-col justify-between ${space.aspectRatio} group`}
                   id={`space-card-${space.id}`}
                 >
                   <div className="relative overflow-hidden cursor-pointer h-56 md:h-64 lg:h-52 shrink-0" onClick={() => setSelectedRoom(space)}>
-                    <img 
-                      src={space.imageUrl} 
+                    <img
+                      src={space.imageUrl}
                       alt={space.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
@@ -452,7 +452,7 @@ export default function App() {
                     </div>
 
                     <div className="mt-5 pt-4 border-t border-stone-100 flex items-center justify-between">
-                      <button 
+                      <button
                         onClick={() => setSelectedRoom(space)}
                         className="font-sans text-xs text-text-dark font-medium underline decoration-terracotta/40 hover:decoration-terracotta underline-offset-4 transition-all uppercase tracking-wider flex items-center gap-1 cursor-pointer focus:outline-none"
                       >
@@ -478,8 +478,8 @@ export default function App() {
           <div className="border-t border-terracotta/20 pt-8 mt-18">
             <div className="flex overflow-x-auto whitespace-nowrap scrollbar-none pb-4 md:pb-0 gap-6 md:justify-between items-center text-text-dark">
               {AMENITIES.map((amenity, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex items-center gap-2.5 shrink-0"
                 >
                   <span className="text-sm select-none bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-stone-200">{amenity.icon}</span>
@@ -500,18 +500,18 @@ export default function App() {
       </section>
 
       {/* SECTION 4 — THE EXPERIENCE (Cinematic Video / Story Columns) */}
-      <section 
-        id="experience" 
+      <section
+        id="experience"
         className="relative bg-bg-dark text-[#f2e8d8] overflow-hidden"
       >
         {/* Background Looping Atmospheric Video */}
         <div className="relative w-full h-[55vh] min-h-[350px] md:h-[70vh] bg-stone-900 overflow-hidden flex items-center justify-center">
-          
-          <video 
+
+          <video
             className="absolute inset-0 w-full h-full object-cover opacity-50 select-none pointer-events-none scale-102"
-            autoPlay 
-            muted 
-            loop 
+            autoPlay
+            muted
+            loop
             playsInline
             poster={siteImages?.videoPoster || DEFAULT_SITE_IMAGES.videoPoster}
           >
@@ -536,7 +536,7 @@ export default function App() {
 
         {/* Feature Story Blocks columns */}
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 border-t border-terracotta/10">
-          
+
           <div className="space-y-4">
             <span className="font-sans text-xs uppercase tracking-widest text-[#c47a52] font-semibold block">SURF</span>
             <h4 className="font-serif italic text-2xl text-[#e8c07a]">The break is 1-minute walk.</h4>
@@ -565,12 +565,12 @@ export default function App() {
       </section>
 
       {/* SECTION 5 — THE STORY */}
-      <section 
-        id="story" 
+      <section
+        id="story"
         className="py-18 md:py-28 bg-bg-linen text-text-dark px-6 md:px-12 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Column long text */}
           <div className="lg:col-span-7 space-y-6 text-left">
             <span className="font-sans text-xs uppercase tracking-widest text-terracotta font-semibold block mb-2">
@@ -579,13 +579,13 @@ export default function App() {
             <h2 className="font-serif italic text-4xl md:text-5xl text-text-dark leading-tight max-w-xl">
               &ldquo;A place that knew what it was before anyone named it.&rdquo;
             </h2>
-            
+
             <div className="font-sans font-light text-base text-text-dark/90 leading-relaxed space-y-6 max-w-2xl pr-4">
               <p>
                 Aethera began as a colonial home — the kind that takes decades to acquire the quality of light that falls through its shuttered windows at 6am. The kind where a peacock showing up in the courtyard feels less like a surprise and more like something that was always meant to happen.
               </p>
               <p>
-                We didn&rsquo;t build this place to mimic trendy internet hotspots. We listened to what the layout already wanted to be — and then we made space for the right kind of slow-traveling souls to find it. 
+                We didn&rsquo;t build this place to mimic trendy internet hotspots. We listened to what the layout already wanted to be — and then we made space for the right kind of slow-traveling souls to find it.
               </p>
               <p className="font-serif italic text-lg text-terracotta">
                 If you&rsquo;re here, you probably know what we mean.
@@ -595,13 +595,13 @@ export default function App() {
 
           {/* Right Column 2x2 organic Photo Grid */}
           <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            
+
             <div className="space-y-4">
               {/* Baby turtles */}
               <div className="overflow-hidden rounded-tl-[48px] rounded-br-[24px] shadow-md border border-[#dfcda2]">
-                <img 
-                  src={siteImages?.storyTurtle || DEFAULT_SITE_IMAGES.storyTurtle} 
-                  alt="Turtle on sand" 
+                <img
+                  src={siteImages?.storyTurtle || DEFAULT_SITE_IMAGES.storyTurtle}
+                  alt="Turtle on sand"
                   className="w-full h-40 md:h-48 object-cover hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -609,9 +609,9 @@ export default function App() {
               </div>
               {/* Cozy Room lamp lights */}
               <div className="overflow-hidden rounded-tr-[48px] rounded-bl-[24px] shadow-md border border-[#dfcda2]">
-                <img 
-                  src={siteImages?.storyInterior || DEFAULT_SITE_IMAGES.storyInterior} 
-                  alt="Cozy interior room lamp" 
+                <img
+                  src={siteImages?.storyInterior || DEFAULT_SITE_IMAGES.storyInterior}
+                  alt="Cozy interior room lamp"
                   className="w-full h-56 md:h-64 object-cover hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -622,9 +622,9 @@ export default function App() {
             <div className="space-y-4 pt-8">
               {/* Water hyacinth bloom */}
               <div className="overflow-hidden rounded-tr-[48px] rounded-bl-[24px] shadow-md border border-[#dfcda2]">
-                <img 
-                  src={siteImages?.storyLily || DEFAULT_SITE_IMAGES.storyLily} 
-                  alt="Water lily bloom" 
+                <img
+                  src={siteImages?.storyLily || DEFAULT_SITE_IMAGES.storyLily}
+                  alt="Water lily bloom"
                   className="w-full h-56 md:h-64 object-cover hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -632,9 +632,9 @@ export default function App() {
               </div>
               {/* Peacock on stone brick */}
               <div className="overflow-hidden rounded-tl-[48px] rounded-br-[24px] shadow-md border border-[#dfcda2]">
-                <img 
-                  src={siteImages?.storyPeacock || DEFAULT_SITE_IMAGES.storyPeacock} 
-                  alt="Peacock on courtyard brick" 
+                <img
+                  src={siteImages?.storyPeacock || DEFAULT_SITE_IMAGES.storyPeacock}
+                  alt="Peacock on courtyard brick"
                   className="w-full h-40 md:h-48 object-cover hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -648,12 +648,12 @@ export default function App() {
       </section>
 
       {/* SECTION 5.5 — THE VILLA GALLERY */}
-      <section 
-        id="villa-gallery" 
+      <section
+        id="villa-gallery"
         className="py-18 md:py-28 bg-bg-dark px-6 md:px-12 relative border-t border-terracotta/10"
       >
         <div className="max-w-7xl mx-auto">
-          
+
           {/* Header block (centered) */}
           <div className="text-center">
             <span className="font-sans text-xs uppercase tracking-widest text-terracotta font-semibold block mb-2">
@@ -669,14 +669,14 @@ export default function App() {
           {/* Image grid */}
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
             {(villaGallery.length > 0 ? villaGallery : []).map((item, idx) => (
-              <div 
+              <div
                 key={item.id || idx}
                 id={`villa-gallery-item-${idx}`}
                 className="break-inside-avoid relative overflow-hidden rounded-xl border border-terracotta/10 shadow-lg group cursor-pointer"
                 onClick={() => setLightboxImage(item.imageUrl)}
               >
-                <img 
-                  src={item.imageUrl} 
+                <img
+                  src={item.imageUrl}
                   alt={item.caption}
                   className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-104"
                   loading="lazy"
@@ -703,7 +703,7 @@ export default function App() {
             <p className="font-serif italic text-sm text-text-muted">
               Every corner has a story. Come find yours.
             </p>
-            <a 
+            <a
               href="#booking"
               id="villa-gallery-cta"
               className="font-sans text-xs uppercase tracking-widest text-terracotta hover:text-gold-light font-semibold mt-2 inline-block transition-colors"
@@ -716,12 +716,12 @@ export default function App() {
       </section>
 
       {/* SECTION 6 — LOCATION */}
-      <section 
-        id="location" 
+      <section
+        id="location"
         className="py-18 md:py-28 bg-[#140f08] px-6 md:px-12 relative border-t border-b border-terracotta/10"
       >
         <div className="max-w-7xl mx-auto">
-          
+
           <div className="text-center mb-12">
             <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#e8c07a] font-medium block mb-2">
               LOCATION
@@ -732,7 +732,7 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-            
+
             {/* Custom Interactive SVG coastline map on Left */}
             <div className="lg:col-span-7 flex flex-col justify-center">
               <MapIllustration />
@@ -746,8 +746,8 @@ export default function App() {
                 </h4>
                 <div className="space-y-4">
                   {MILESTONES.map((milestone, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className={`flex justify-between items-center pb-3 border-b border-text-muted/10 text-sm ${milestone.highlight ? 'text-[#e8c07a] font-semibold' : 'text-text-light/85'}`}
                     >
                       <div className="flex items-center gap-3">
@@ -764,9 +764,9 @@ export default function App() {
                 <p className="font-serif italic text-sm text-text-muted">
                   &ldquo;The best things in Mirissa are all within walking distance. We&rsquo;re right in the middle of them.&rdquo;
                 </p>
-                <a 
-                  href="https://maps.google.com/?q=Mirissa+Sri+Lanka" 
-                  target="_blank" 
+                <a
+                  href="https://maps.google.com/?q=Mirissa+Sri+Lanka"
+                  target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 font-sans text-xs text-terracotta uppercase tracking-wider font-semibold mt-4 hover:text-gold-light transition-colors"
                 >
@@ -782,12 +782,12 @@ export default function App() {
       </section>
 
       {/* SECTION 7 — EXPERIENCES / ACTIVITIES (Horizontal Scroll snap strip) */}
-      <section 
-        id="activities" 
+      <section
+        id="activities"
         className="py-18 md:py-28 bg-bg-parchment text-text-dark px-6 md:px-12 relative"
       >
         <div className="max-w-7xl mx-auto">
-          
+
           <div className="mb-10 text-center md:text-left">
             <span className="font-sans text-xs uppercase tracking-widest text-[#c47a52] font-semibold block mb-2 select-none">
               THINGS TO DO
@@ -800,32 +800,32 @@ export default function App() {
           {/* Activities snapper container scroll */}
           <div className="flex gap-6 overflow-x-auto pb-8 snap-inline-scroll scrollbar-thin scrollbar-thumb-terracotta/30 justify-start">
             {ACTIVITIES.map((act) => (
-              <div 
+              <div
                 key={act.id}
                 className="w-80 md:w-96 shrink-0 relative rounded-2xl overflow-hidden aspect-[4/5] bg-bg-dark text-text-light snap-inline-item shadow-xl border border-stone-200/50 group"
               >
                 {/* Image */}
-                <img 
-                  src={getActivityImage(act.id, act.imageUrl)} 
-                  alt={act.title} 
+                <img
+                  src={getActivityImage(act.id, act.imageUrl)}
+                  alt={act.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                   referrerPolicy="no-referrer"
                 />
-                
+
                 {/* Warm black/terracotta bottom card gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent"></div>
-                
+
                 {/* Text overlays */}
                 <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end">
                   <span className="text-[10px] bg-terracotta/90 text-text-light font-sans font-semibold tracking-widest uppercase py-1 px-2.5 rounded-md w-fit mb-3">
                     {act.tag}
                   </span>
-                  
+
                   <h3 className="font-serif italic text-2xl text-gold-light mb-2">
                     {act.title}
                   </h3>
-                  
+
                   <p className="font-sans font-light text-xs md:text-[13px] text-text-light/90 leading-relaxed">
                     {act.description}
                   </p>
@@ -838,12 +838,12 @@ export default function App() {
       </section>
 
       {/* SECTION 8 — GALLERY */}
-      <section 
-        id="gallery" 
+      <section
+        id="gallery"
         className="py-18 md:py-28 bg-[#140f08] px-6 md:px-12 relative"
       >
         <div className="max-w-7xl mx-auto">
-          
+
           <div className="text-center mb-10">
             <span className="font-sans text-xs uppercase tracking-widest text-[#e8c07a] font-semibold block mb-2 select-none">
               THE AETHERA LIFE
@@ -869,14 +869,14 @@ export default function App() {
           {/* Masonry Image Feed */}
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
             {filteredGallery.map((item) => (
-              <div 
+              <div
                 key={item.id}
                 className="break-inside-avoid relative overflow-hidden rounded-xl border border-terracotta/10 shadow-lg group cursor-pointer"
                 onClick={() => setLightboxImage(item.imageUrl)}
                 id={`gallery-item-${item.id}`}
               >
-                <img 
-                  src={item.imageUrl} 
+                <img
+                  src={item.imageUrl}
                   alt={item.caption}
                   className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-104"
                   loading="lazy"
@@ -897,9 +897,9 @@ export default function App() {
           {/* Bottom Instagram prompt link */}
           <div className="text-center mt-12">
             <span className="font-sans text-xs text-text-muted block mb-3">Follow the story</span>
-            <a 
-              href="https://instagram.com/aethera.stay" 
-              target="_blank" 
+            <a
+              href="https://instagram.com/aethera.stay"
+              target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 font-serif italic text-2xl text-gold-light hover:text-terracotta transition-colors group"
             >
@@ -913,14 +913,14 @@ export default function App() {
       </section>
 
       {/* SECTION 9 — TESTIMONIAL POSTCARDS */}
-      <section 
-        id="testimonials" 
+      <section
+        id="testimonials"
         className="py-18 md:py-28 bg-[#1e1509] px-6 md:px-12 relative overflow-hidden text-text-dark"
       >
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-terracotta/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          
+
           <span className="block font-sans text-xs uppercase tracking-widest text-text-light/60 font-semibold mb-3">RESONANCE</span>
           <h2 className="font-serif italic text-4xl md:text-5xl text-text-light mb-16">
             Reflections written on the veranda
@@ -928,7 +928,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-stretch pt-2 pb-6 max-w-5xl mx-auto">
             {TESTIMONIALS.map((post) => (
-              <div 
+              <div
                 key={post.id}
                 className={`bg-bg-parchment p-8 md:p-10 rounded-xl relative shadow-2xl flex flex-col justify-between transform transition-transform duration-500 hover:rotate-0 hover:scale-103 ${post.rotation}`}
                 id={`testimonial-postcard-${post.id}`}
@@ -957,22 +957,22 @@ export default function App() {
       </section>
 
       {/* SECTION 10 — BOOKING DIRECT CTA / WIDGET */}
-      <section 
-        id="booking" 
+      <section
+        id="booking"
         className="py-18 md:py-28 relative overflow-hidden"
       >
         {/* Full background Golden Hour Overlay block */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={siteImages?.bookingBg || DEFAULT_SITE_IMAGES.bookingBg} 
-            alt="Golden Hour Soaking tub background" 
+          <img
+            src={siteImages?.bookingBg || DEFAULT_SITE_IMAGES.bookingBg}
+            alt="Golden Hour Soaking tub background"
             className="w-full h-full object-cover scale-102 filter brightness-[0.35]"
             referrerPolicy="no-referrer"
           />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6">
-          
+
           <div className="text-center mb-16 max-w-xl mx-auto">
             <h2 className="font-serif italic text-5xl md:text-6xl text-text-light mb-4">
               Come as you are. <br />
@@ -990,9 +990,9 @@ export default function App() {
           <div className="mt-14 pt-8 border-t border-text-light/15 text-center flex flex-col md:flex-row justify-center items-center gap-4 text-xs text-text-muted">
             <span className="uppercase tracking-wider font-semibold">Preferred OTA Channels:</span>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a 
-                href="https://www.hostelworld.com" 
-                target="_blank" 
+              <a
+                href="https://www.hostelworld.com"
+                target="_blank"
                 rel="noreferrer"
                 className="hover:text-gold-light underline underline-offset-4 decoration-current transition-colors flex items-center gap-1"
               >
@@ -1000,9 +1000,9 @@ export default function App() {
                 <ExternalLink className="w-3 h-3 text-terracotta" />
               </a>
               <span className="h-2 w-[1px] bg-text-muted/30 hidden md:block"></span>
-              <a 
-                href="https://www.booking.com" 
-                target="_blank" 
+              <a
+                href="https://www.booking.com"
+                target="_blank"
                 rel="noreferrer"
                 className="hover:text-gold-light underline underline-offset-4 decoration-current transition-colors flex items-center gap-1"
               >
@@ -1010,9 +1010,9 @@ export default function App() {
                 <ExternalLink className="w-3 h-3 text-terracotta" />
               </a>
               <span className="h-2 w-[1px] bg-text-muted/30 hidden md:block"></span>
-              <a 
-                href="https://wa.me/94771234567" 
-                target="_blank" 
+              <a
+                href="https://wa.me/94765618401"
+                target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#e8c07a] font-semibold text-terracotta flex items-center gap-1 transition-colors"
                 id="footer-whatspp-lead"
@@ -1027,12 +1027,12 @@ export default function App() {
       </section>
 
       {/* SECTION 11 — FOOTER */}
-      <footer 
-        id="footer" 
+      <footer
+        id="footer"
         className="bg-[#0c0804] text-text-light/80 border-t border-terracotta/15 py-16 px-6 md:px-12"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-          
+
           {/* Left Column Brand info */}
           <div className="space-y-4">
             <h4 className="font-serif italic text-2xl text-gold-light">Aethera Stay</h4>
@@ -1061,7 +1061,7 @@ export default function App() {
             <div className="font-sans text-xs md:text-[13px] space-y-2">
               <p>
                 <span className="text-text-muted block">Direct Desk WhatsApp:</span>
-                <a href="https://wa.me/94771234567" className="text-gold-light hover:underline font-medium hover:text-[#f2e8d8] transition-colors">+94 77 123 4567</a>
+                <a href="https://wa.me/94765618401" className="text-gold-light hover:underline font-medium hover:text-[#f2e8d8] transition-colors">+94 77 123 4567</a>
               </p>
               <p className="pt-1.5">
                 <span className="text-text-muted block">Direct Desk Email:</span>
@@ -1069,9 +1069,9 @@ export default function App() {
               </p>
             </div>
             <div className="flex items-center gap-3 pt-2">
-              <a 
-                href="https://instagram.com/aethera.stay" 
-                target="_blank" 
+              <a
+                href="https://instagram.com/aethera.stay"
+                target="_blank"
                 rel="noreferrer"
                 className="bg-bg-dark border border-terracotta/15 w-9 h-9 rounded-full flex items-center justify-center text-gold-light hover:text-terracotta transition-all shadow-sm"
                 title="Follow Aethera on Instagram"
@@ -1092,20 +1092,20 @@ export default function App() {
 
       {/* Lightbox / Gallery Fullscreen Image Viewer Modal */}
       {lightboxImage && (
-        <div 
+        <div
           className="fixed inset-0 w-full h-full bg-[#140f08]/96 z-50 flex items-center justify-center p-4 cursor-pointer"
           onClick={() => setLightboxImage(null)}
           id="gallery-fullscreen-lightbox"
         >
-          <button 
+          <button
             onClick={() => setLightboxImage(null)}
             className="absolute top-6 right-6 text-[#e8c07a] hover:text-terracotta w-10 h-10 rounded-full border border-terracotta/10 flex items-center justify-center bg-bg-dark/80 cursor-pointer"
           >
             &times;
           </button>
-          <img 
-            src={lightboxImage} 
-            alt="Fullscreen Galleried snapshot" 
+          <img
+            src={lightboxImage}
+            alt="Fullscreen Galleried snapshot"
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-200"
             referrerPolicy="no-referrer"
           />
@@ -1114,9 +1114,9 @@ export default function App() {
 
       {/* Reusable Room Detail Display Portal Popup dialog */}
       {selectedRoom && (
-        <RoomModal 
-          room={selectedRoom} 
-          onClose={() => setSelectedRoom(null)} 
+        <RoomModal
+          room={selectedRoom}
+          onClose={() => setSelectedRoom(null)}
           onBookRoom={handlePreSelectRoom}
         />
       )}
