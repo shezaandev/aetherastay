@@ -1061,7 +1061,7 @@ export default function App() {
             <div className="font-sans text-xs md:text-[13px] space-y-2">
               <p>
                 <span className="text-text-muted block">Direct Desk WhatsApp:</span>
-                <a href="https://wa.me/94765618401" className="text-gold-light hover:underline font-medium hover:text-[#f2e8d8] transition-colors">+94 76 5618401</a>
+                <a href="https://wa.me/94765618401" className="text-gold-light hover:underline font-medium hover:text-[#f2e8d8] transition-colors">+94 76 561 8401</a>
               </p>
               <p className="pt-1.5">
                 <span className="text-text-muted block">Direct Desk Email:</span>
