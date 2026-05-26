@@ -1,0 +1,6 @@
+{
+  "name": "Aethera Stay",
+  "description": "A boutique colonial guesthouse website in Mirissa, Sri Lanka - Where Inside Meets Outside.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

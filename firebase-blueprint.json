@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "Enquiry": {
+      "title": "Booking Enquiry",
+      "description": "Enquiry entries submitted from the booking widget",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "checkIn": { "type": "string" },
+        "checkOut": { "type": "string" },
+        "guestsCount": { "type": "number" },
+        "selectedRoomId": { "type": "string" },
+        "selectedRoomName": { "type": "string" },
+        "message": { "type": "string" },
+        "totalPrice": { "type": "number" },
+        "nights": { "type": "number" },
+        "status": { "type": "string", "enum": ["new", "read", "confirmed", "cancelled"] },
+        "receivedAt": { "type": "string" }
+      },
+      "required": ["fullName", "email", "checkIn", "checkOut", "guestsCount", "selectedRoomId", "selectedRoomName", "totalPrice", "nights", "status", "receivedAt"]
+    },
+    "Room": {
+      "title": "Room or Space",
+      "description": "Details about rooms and public spaces",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "details": { "type": "array" },
+        "capacity": { "type": "string" },
+        "bedType": { "type": "string" },
+        "ratePerNight": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "aspectRatio": { "type": "string" }
+      },
+      "required": ["id", "name", "description", "details", "capacity", "bedType", "ratePerNight", "imageUrl", "aspectRatio"]
+    },
+    "GalleryItem": {
+      "title": "Gallery Item",
+      "description": "An item in the image gallery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "caption": { "type": "string" }
+      },
+      "required": ["id", "imageUrl", "category", "caption"]
+    },
+    "SiteImages": {
+      "title": "Site-Wide Images",
+      "description": "Non-gallery persistent images around the site",
+      "type": "object",
+      "properties": {
+        "heroImage": { "type": "string" },
+        "storyTurtle": { "type": "string" },
+        "storyInterior": { "type": "string" },
+        "storyLily": { "type": "string" },
+        "storyPeacock": { "type": "string" },
+        "bookingBg": { "type": "string" },
+        "actSurf": { "type": "string" },
+        "actWhale": { "type": "string" },
+        "actYoga": { "type": "string" },
+        "actDoctors": { "type": "string" },
+        "actTurtle": { "type": "string" },
+        "videoPoster": { "type": "string" }
+      },
+      "required": ["heroImage", "storyTurtle", "storyInterior", "storyLily", "storyPeacock", "bookingBg", "actSurf", "actWhale", "actYoga", "actDoctors", "actTurtle", "videoPoster"]
+    }
+  },
+  "firestore": {
+    "enquiries/{enquiryId}": {
+      "schema": "Enquiry",
+      "description": "Customer booking enquiries"
+    },
+    "rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Room configurations"
+    },
+    "gallery/{galleryId}": {
+      "schema": "GalleryItem",
+      "description": "Masonry gallery pictures"
+    },
+    "siteImages/{id}": {
+      "schema": "SiteImages",
+      "description": "Site-wide image links"
+    }
+  }
+}

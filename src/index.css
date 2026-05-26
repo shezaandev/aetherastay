@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-dark: #140f08;
+  --color-bg-warm: #1e1509;
+  --color-bg-parchment: #f0e8d6;
+  --color-bg-linen: #e8dcc8;
+  --color-terracotta: #c47a52;
+  --color-gold-light: #e8c07a;
+  --color-dusty-pink: #c98a92;
+  --color-sage: #7d9e7a;
+  --color-ocean-grey: #708fa0;
+  --color-text-light: #f2e8d8;
+  --color-text-dark: #1e1208;
+  --color-text-muted: #8a7a68;
+
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-display: "DM Serif Display", serif;
+  --font-sans: "Jost", sans-serif;
+}
+
+/* Custom Scrollbar for a luxurious feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #140f08;
+}
+::-webkit-scrollbar-thumb {
+  background: #c47a52;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e8c07a;
+}
+
+/* Base styles and grain texture overlay */
+body {
+  background-color: #140f08;
+  color: #f2e8d8;
+  font-family: "Jost", sans-serif;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Custom Editorial Curves & Borders */
+.editorial-frame-hero {
+  border-top-left-radius: 120px;
+  border-bottom-right-radius: 60px;
+}
+
+.editorial-frame-panel {
+  border-top-right-radius: 80px;
+}
+
+.border-bronze-light {
+  border-color: rgba(196, 122, 82, 0.2);
+}
+
+.border-bronze-soft {
+  border-color: rgba(196, 122, 82, 0.15);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fade up definitions for Intersection Observer animations */
+.fade-up-element {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.fade-up-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom horizontal scroll container snap properties */
+.snap-inline-scroll {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.snap-inline-item {
+  scroll-snap-align: start;
+}
+
